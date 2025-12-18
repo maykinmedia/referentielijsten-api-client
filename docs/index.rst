@@ -5,7 +5,7 @@
 Welcome to referentielijsten_api_client's documentation!
 ========================================================
 
-|build-status| |code-quality| |ruff| |coverage| |docs|
+|build-status| |code-quality| |ruff| |coverage|
 
 |python-versions| |django-versions| |pypi-version|
 
@@ -33,29 +33,25 @@ Indices and tables
 * :ref:`search`
 
 
-.. |build-status| image:: https://github.com/maykinmedia/referentielijsten_api_client/workflows/Run%20CI/badge.svg
+.. |build-status| image:: https://github.com/maykinmedia/referentielijsten-api-client/workflows/Run%20CI/badge.svg
     :alt: Build status
-    :target: https://github.com/maykinmedia/referentielijsten_api_client/actions?query=workflow%3A%22Run+CI%22
+    :target: https://github.com/maykinmedia/referentielijsten-api-client/actions?query=workflow%3A%22Run+CI%22
 
-.. |code-quality| image:: https://github.com/maykinmedia/referentielijsten_api_client/workflows/Code%20quality%20checks/badge.svg
+.. |code-quality| image:: https://github.com/maykinmedia/referentielijsten-api-client/workflows/Code%20quality%20checks/badge.svg
      :alt: Code quality checks
-     :target: https://github.com/maykinmedia/referentielijsten_api_client/actions?query=workflow%3A%22Code+quality+checks%22
+     :target: https://github.com/maykinmedia/referentielijsten-api-client/actions?query=workflow%3A%22Code+quality+checks%22
 
 .. |ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
     :target: https://github.com/astral-sh/ruff
     :alt: Ruff
 
-.. |coverage| image:: https://codecov.io/gh/maykinmedia/referentielijsten_api_client/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/maykinmedia/referentielijsten_api_client
+.. |coverage| image:: https://codecov.io/gh/maykinmedia/referentielijsten-api-client/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/maykinmedia/referentielijsten-api-client
     :alt: Coverage status
 
-.. |docs| image:: https://readthedocs.org/projects/referentielijsten_api_client/badge/?version=latest
-    :target: https://referentielijsten_api_client.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/referentielijsten-api-client.svg
 
-.. |python-versions| image:: https://img.shields.io/pypi/pyversions/referentielijsten_api_client.svg
+.. |django-versions| image:: https://img.shields.io/pypi/djversions/referentielijsten-api-client.svg
 
-.. |django-versions| image:: https://img.shields.io/pypi/djversions/referentielijsten_api_client.svg
-
-.. |pypi-version| image:: https://img.shields.io/pypi/v/referentielijsten_api_client.svg
-    :target: https://pypi.org/project/referentielijsten_api_client/
+.. |pypi-version| image:: https://img.shields.io/pypi/v/referentielijsten-api-client.svg
+    :target: https://pypi.org/project/referentielijsten-api-client/

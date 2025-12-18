@@ -8,7 +8,7 @@ Welcome to referentielijsten_api_client's documentation!
 :Keywords: ``<keywords>``
 :PythonVersion: 3.10
 
-|build-status| |code-quality| |ruff| |coverage| |docs|
+|build-status| |code-quality| |ruff| |coverage|
 
 |python-versions| |django-versions| |pypi-version|
 
@@ -82,10 +82,6 @@ directory to the python path (or use ``python -m django <command>``):
 .. |coverage| image:: https://codecov.io/gh/maykinmedia/referentielijsten_api_client/branch/main/graph/badge.svg
     :target: https://codecov.io/gh/maykinmedia/referentielijsten_api_client
     :alt: Coverage status
-
-.. |docs| image:: https://readthedocs.org/projects/referentielijsten_api_client/badge/?version=latest
-    :target: https://referentielijsten_api_client.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
 
 .. |python-versions| image:: https://img.shields.io/pypi/pyversions/referentielijsten_api_client.svg
 
