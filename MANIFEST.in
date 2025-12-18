@@ -1,0 +1,8 @@
+include *.rst
+include LICENSE
+include referentielijsten_api_client/py.typed
+recursive-include referentielijsten_api_client *.html
+recursive-include referentielijsten_api_client *.txt
+recursive-include referentielijsten_api_client *.po
+global-exclude __pycache__
+global-exclude *.py[co]
