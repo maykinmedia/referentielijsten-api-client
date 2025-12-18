@@ -1,7 +1,7 @@
 
 
 Welcome to referentielijsten_api_client's documentation!
-=================================================
+========================================================
 
 :Version: 0.1.0
 :Source: https://github.com/maykinmedia/referentielijsten_api_client

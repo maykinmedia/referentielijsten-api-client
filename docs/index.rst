@@ -3,7 +3,7 @@
    contain the root `toctree` directive.
 
 Welcome to referentielijsten_api_client's documentation!
-=================================================
+========================================================
 
 |build-status| |code-quality| |ruff| |coverage| |docs|
 
