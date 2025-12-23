@@ -5,14 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "referentielijsten_api_client"
 version = "0.1.0"
-description = "TODO"
+description = "API Client library to communicate with the Referentielijsten API service."
 authors = [
     {name = "Maykin Media", email = "support@maykinmedia.nl"}
 ]
 readme = "README.rst"
 license = "MIT"
 license-files = ["LICENSE"]
-keywords = ["TODO"]
+keywords = ["maykin", "referentielijsten_api", "referentielijsten api", "referentielijsten api client", "common ground", "api client"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Framework :: Django",
@@ -28,14 +28,15 @@ classifiers = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "django>=4.2"
+    "django>=4.2",
+    "ape_pie>=0.2.0",
 ]
 
 [project.urls]
-Homepage = "https://github.com/maykinmedia/referentielijsten_api_client"
-Documentation = "http://referentielijsten_api_client.readthedocs.io/en/latest/"
-"Bug Tracker" = "https://github.com/maykinmedia/referentielijsten_api_client/issues"
-"Source Code" = "https://github.com/maykinmedia/referentielijsten_api_client"
+Homepage = "https://github.com/maykinmedia/referentielijsten-api-client"
+Documentation = "http://referentielijsten-api-client.readthedocs.io/en/latest/"
+"Bug Tracker" = "https://github.com/maykinmedia/referentielijsten-api-client/issues"
+"Source Code" = "https://github.com/maykinmedia/referentielijsten-api-client"
 
 [project.optional-dependencies]
 tests = [
@@ -44,9 +45,14 @@ tests = [
     "pytest-cov",
     "tox",
     "ruff",
-    # "pyright",
-    # "django-stubs",
+    "pyright",
+    "vcrpy",
+    "pydantic",
+    "requests",
+    "types-requests",
+    "factory-boy"
 ]
+
 docs = [
     "sphinx",
     "sphinx-rtd-theme",
@@ -61,7 +67,9 @@ namespaces = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-DJANGO_SETTINGS_MODULE = "testapp.settings"
+markers = [
+    "vcr: mark tests that use VCR cassettes for HTTP interactions",
+]
 
 [tool.bumpversion]
 current_version = "0.1.0"
