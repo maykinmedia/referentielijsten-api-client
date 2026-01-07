@@ -1,91 +1,84 @@
+============================
+Referentielijsten Api Client
+============================
 
-
-Welcome to referentielijsten_api_client's documentation!
-========================================================
+A Python client library for interacting with the `Referentielijsten API <https://github.com/maykinmedia/referentielijsten>`_.
 
 :Version: 0.1.0
-:Source: https://github.com/maykinmedia/referentielijsten_api_client
-:Keywords: ``<keywords>``
+:Source: https://github.com/maykinmedia/referentielijsten-api-client
+:Keywords: ``maykin, referentielijsten_api, referentielijsten api, referentielijsten api client, common ground, api client``
 :PythonVersion: 3.10
 
 |build-status| |code-quality| |ruff| |coverage|
 
 |python-versions| |django-versions| |pypi-version|
 
-<One liner describing the project>
-
 .. contents::
 
 .. section-numbering::
 
-Features
-========
-
-* ...
-* ...
-
 Installation
 ============
 
-Requirements
-------------
-
-* Python 3.10 or above
-* Django 4.2 or newer
-
-
-Install
--------
-
 .. code-block:: bash
 
-    pip install referentielijsten_api_client
+    pip install referentielijsten-api-client
+
 
 
 Usage
 =====
 
-<document or refer to docs>
+Initialize the client with your API endpoint and token:
 
-Local development
-=================
+.. code-block:: python
 
-To install and develop the library locally, use::
+    from referentielijsten_api_client import ReferentielijstenClient
 
-.. code-block:: bash
+    client = ReferentielijstenClient(
+        base_url={{ base_url }},
+        token={{ your_api_token}},
+    )
 
-    pip install -e .[tests,coverage,docs,release]
+List tables
+-----------
 
-When running management commands via ``django-admin``, make sure to add the root
-directory to the python path (or use ``python -m django <command>``):
+.. code-block:: python
 
-.. code-block:: bash
+    # List all tables
 
-    export PYTHONPATH=. DJANGO_SETTINGS_MODULE=testapp.settings
-    django-admin check
-    # or other commands like:
-    # django-admin makemessages -l nl
+    tables = client.get_all_tables()
+
+List items for a specific table
+-------------------------------
+
+.. code-block:: python
+
+    # List items
+
+    table_code = "tabel_code"
+    items = client.get_items_for_table(table_code)
 
 
-.. |build-status| image:: https://github.com/maykinmedia/referentielijsten_api_client/workflows/Run%20CI/badge.svg
+.. |build-status| image:: https://github.com/maykinmedia/referentielijsten-api-client/workflows/Run%20CI/badge.svg
     :alt: Build status
-    :target: https://github.com/maykinmedia/referentielijsten_api_client/actions?query=workflow%3A%22Run+CI%22
+    :target: https://github.com/maykinmedia/referentielijsten-api-client/actions?query=workflow%3A%22Run+CI%22
 
-.. |code-quality| image:: https://github.com/maykinmedia/referentielijsten_api_client/workflows/Code%20quality%20checks/badge.svg
+.. |code-quality| image:: https://github.com/maykinmedia/referentielijsten-api-client/workflows/Code%20quality%20checks/badge.svg
      :alt: Code quality checks
-     :target: https://github.com/maykinmedia/referentielijsten_api_client/actions?query=workflow%3A%22Code+quality+checks%22
+     :target: https://github.com/maykinmedia/referentielijsten-api-client/actions?query=workflow%3A%22Code+quality+checks%22
 
 .. |ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
     :target: https://github.com/astral-sh/ruff
     :alt: Ruff
 
-.. |coverage| image:: https://codecov.io/gh/maykinmedia/referentielijsten_api_client/branch/main/graph/badge.svg
-    :target: https://codecov.io/gh/maykinmedia/referentielijsten_api_client
+.. |coverage| image:: https://codecov.io/gh/maykinmedia/referentielijsten-api-client/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/maykinmedia/referentielijsten-api-client
     :alt: Coverage status
 
-.. |python-versions| image:: https://img.shields.io/pypi/pyversions/referentielijsten_api_client.svg
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/referentielijsten-api-client.svg
 
-.. |django-versions| image:: https://img.shields.io/pypi/djversions/referentielijsten_api_client.svg
+.. |django-versions| image:: https://img.shields.io/pypi/djversions/referentielijsten-api-client.svg
 
-.. |pypi-version| image:: https://img.shields.io/pypi/v/referentielijsten_api_client.svg
-    :target: https://pypi.org/project/referentielijsten_api_client/
+.. |pypi-version| image:: https://img.shields.io/pypi/v/referentielijsten-api-client.svg
+    :target: https://pypi.org/project/referentielijsten-api-client/
