@@ -11,21 +11,51 @@ interactions:
       User-Agent:
       - python-requests/2.32.5
     method: GET
-    uri: http://localhost:8004/api/v1/tabellen
+    uri: http://localhost:8004/api/v1
   response:
     body:
-      string: '{"count":4,"next":null,"previous":null,"results":[{"code":"item-not-geldig-anymore","naam":"Tabel
-        that contains item not geldig anymore","beheerder":{"naam":"","email":"","afdeling":"","organisatie":""},"einddatumGeldigheid":null},{"code":"not-geldig-anymore","naam":"Tabel
-        that is not geldig anymore","beheerder":{"naam":"","email":"","afdeling":"","organisatie":""},"einddatumGeldigheid":"2020-02-03T08:48:49Z"},{"code":"tabel-with-many-items","naam":"Tabel
-        with many items","beheerder":{"naam":"","email":"","afdeling":"","organisatie":""},"einddatumGeldigheid":null},{"code":"tabel1","naam":"Tabel1","beheerder":{"naam":"John
-        Doe","email":"john@doe.nl","afdeling":"","organisatie":""},"einddatumGeldigheid":null}]}'
+      string: ''
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/html; charset=utf-8
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Location:
+      - /api/v1/
+      Referrer-Policy:
+      - same-origin
+      Vary:
+      - origin, Cookie
+      X-Content-Type-Options:
+      - nosniff
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.5
+    method: GET
+    uri: http://localhost:8004/api/v1/
+  response:
+    body:
+      string: '{"items":"http://localhost:8004/api/v1/items","tabellen":"http://localhost:8004/api/v1/tabellen"}'
     headers:
       API-version:
       - 1.0.0-rc1
       Allow:
       - GET, HEAD, OPTIONS
       Content-Length:
-      - '718'
+      - '97'
       Content-Security-Policy:
       - 'frame-src ''self''; font-src ''self'' fonts.gstatic.com; base-uri ''self'';
         style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; img-src ''self''

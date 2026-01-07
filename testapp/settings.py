@@ -52,3 +52,9 @@ TEMPLATES = [
 ]
 
 ROOT_URLCONF = "testapp.urls"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    },
+}
