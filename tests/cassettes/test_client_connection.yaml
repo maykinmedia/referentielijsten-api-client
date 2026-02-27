@@ -10,45 +10,11 @@ interactions:
       - keep-alive
       User-Agent:
       - python-requests/2.32.5
-    method: GET
-    uri: http://localhost:8004/api/v1
-  response:
-    body:
-      string: ''
-    headers:
-      Connection:
-      - close
-      Content-Type:
-      - text/html; charset=utf-8
-      Cross-Origin-Opener-Policy:
-      - same-origin
-      Location:
-      - /api/v1/
-      Referrer-Policy:
-      - same-origin
-      Vary:
-      - origin, Cookie
-      X-Content-Type-Options:
-      - nosniff
-    status:
-      code: 301
-      message: Moved Permanently
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      User-Agent:
-      - python-requests/2.32.5
-    method: GET
+    method: HEAD
     uri: http://localhost:8004/api/v1/
   response:
     body:
-      string: '{"items":"http://localhost:8004/api/v1/items","tabellen":"http://localhost:8004/api/v1/tabellen"}'
+      string: ''
     headers:
       API-version:
       - 0.2.0
@@ -57,11 +23,11 @@ interactions:
       Content-Length:
       - '97'
       Content-Security-Policy:
-      - 'img-src ''self'' data: cdn.redoc.ly; script-src ''self'' ''unsafe-inline'';
-        font-src ''self'' fonts.gstatic.com; base-uri ''self''; frame-ancestors ''none'';
-        default-src ''self''; form-action ''self''; worker-src ''self'' blob:; object-src
-        ''none''; style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; frame-src
-        ''self'''
+      - 'font-src ''self'' fonts.gstatic.com; frame-src ''self''; form-action ''self'';
+        base-uri ''self''; script-src ''self'' ''unsafe-inline''; frame-ancestors
+        ''none''; default-src ''self''; worker-src ''self'' blob:; style-src ''self''
+        ''unsafe-inline'' fonts.googleapis.com; object-src ''none''; img-src ''self''
+        data: cdn.redoc.ly'
       Content-Type:
       - application/json
       Cross-Origin-Opener-Policy:
