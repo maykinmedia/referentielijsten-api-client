@@ -7,7 +7,7 @@ A Python client library for interacting with the `Referentielijsten API <https:/
 :Version: 0.1.0
 :Source: https://github.com/maykinmedia/referentielijsten-api-client
 :Keywords: ``maykin, referentielijsten_api, referentielijsten api, referentielijsten api client, common ground, api client``
-:PythonVersion: 3.10
+:PythonVersion: 3.12
 
 |build-status| |code-quality| |ruff| |coverage|
 
@@ -33,7 +33,7 @@ Initialize the client with your API endpoint and token:
 
 .. code-block:: python
 
-    from referentielijsten_api_client import ReferentielijstenClient
+    from referentielijsten_api_client.client import ReferentielijstenClient
 
     client = ReferentielijstenClient(
         base_url={{ base_url }},
@@ -58,6 +58,16 @@ List items for a specific table
 
     table_code = "tabel_code"
     items = client.get_items_for_table(table_code)
+
+
+Testing
+=======
+
+You can run the test suite using `tox`. To run tests for Python 3.12 and record all HTTP interactions (using `vcrpy`), execute:
+
+.. code-block:: bash
+
+    tox -r -e py312 -- --vcr-record=all
 
 
 .. |build-status| image:: https://github.com/maykinmedia/referentielijsten-api-client/workflows/Run%20CI/badge.svg
