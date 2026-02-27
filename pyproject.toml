@@ -60,6 +60,9 @@ docs = [
 release = [
     "bump-my-version",
 ]
+coverage = [
+    "pytest-cov",
+]
 
 [tool.setuptools.packages.find]
 include = ["referentielijsten_api_client*"]
@@ -89,6 +92,7 @@ omit = [
 ]
 
 [tool.coverage.report]
+skip_covered = true
 exclude_also = [
     "if (typing\\.)?TYPE_CHECKING:",
     "@(typing\\.)?overload",
