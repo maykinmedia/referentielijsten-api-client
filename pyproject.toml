@@ -67,6 +67,7 @@ namespaces = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+DJANGO_SETTINGS_MODULE = "testapp.settings"
 markers = [
     "vcr: mark tests that use VCR cassettes for HTTP interactions",
 ]

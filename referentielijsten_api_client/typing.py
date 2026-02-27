@@ -1,4 +1,4 @@
-from typing import Any, Literal, NotRequired, Required, TypedDict
+from typing import Any, NotRequired, Required, TypedDict
 
 
 class APIAdministrator(TypedDict):
@@ -23,35 +23,8 @@ class APITableItem(TypedDict):
     aanvullendeGegevens: NotRequired[Any]
 
 
-class PaginatedResponseBody[T](TypedDict):
+class PaginatedResponseData[T](TypedDict):
     count: Required[int]
     next: Required[str | None]
     previous: Required[str | None]
     results: Required[list[T]]
-
-
-class InvalidParam(TypedDict):
-    name: str
-    code: str
-    reason: str
-
-
-class ErrorResponseBody(TypedDict):
-    type: str
-    code: str
-    title: str
-    status: int
-    detail: str
-    instance: str
-
-
-class ValidationErrorResponseBody(ErrorResponseBody):
-    status: Literal[400]
-    invalidParams: list[InvalidParam]
-
-
-class PaginatedResponseData(TypedDict):
-    count: int
-    next: str
-    previous: str
-    results: list

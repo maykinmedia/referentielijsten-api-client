@@ -5,8 +5,8 @@ from functools import partial
 from django.core.cache import cache
 from django.utils import timezone
 from django.utils.functional import cached_property
-from django.utils.translation import get_language
 
+import requests
 from ape_pie import APIClient
 
 from .typing import APITable, APITableItem
@@ -47,6 +47,15 @@ class Table(EndDateMixin):
 
 
 class ReferentielijstenClient(APIClient):
+    @property
+    def can_connect(self) -> bool:
+        try:
+            response = self.get("")
+            response.raise_for_status()
+            return response.status_code == 200
+        except requests.RequestException:
+            return False
+
     def get_table(self, code: str) -> Table | None:
         response = self.get("tabellen", params={"code": code})
         response.raise_for_status()
@@ -54,8 +63,6 @@ class ReferentielijstenClient(APIClient):
         all_data: list[APITable] = list(pagination_helper(self, data))
         if not all_data:
             return
-
-        # The API always returns a list and code is a unique field in the model
 
         return Table(
             code=all_data[0]["code"],
@@ -85,12 +92,8 @@ class ReferentielijstenClient(APIClient):
             for record in all_data
         ]
 
-    def get_items_for_table(self, code: str, current_language: str) -> list[TableItem]:
-        response = self.get(
-            "items",
-            params={"tabel__code": code},
-            headers={"Accept-Language": current_language},
-        )
+    def get_items_for_table(self, code: str) -> list[TableItem]:
+        response = self.get("items", params={"tabel__code": code})
         response.raise_for_status()
         data = response.json()
         all_data: list[APITableItem] = list(pagination_helper(self, data))
@@ -108,10 +111,9 @@ class ReferentielijstenClient(APIClient):
         ]
 
     def get_items_for_table_cached(self, code: str) -> list[TableItem]:
-        current_language = get_language()
         result = cache.get_or_set(
-            key=f"referentielijsten_lists|get_items_for_table|code:{code}|language:{current_language}",
-            default=partial(self.get_items_for_table, code, current_language),
+            key=f"referentielijsten_lists|get_items_for_table|code:{code}",
+            default=partial(self.get_items_for_table, code),
             timeout=REFERENTIELIJSTEN_LISTS_LOOKUP_CACHE_TIMEOUT,
         )
         assert result is not None

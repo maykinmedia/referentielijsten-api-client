@@ -1,3 +1,5 @@
+from django.core.cache import cache
+
 import pytest
 
 from .helpers import ReferentielijstenService
@@ -5,6 +7,13 @@ from .helpers import ReferentielijstenService
 API_ROOT: str = "http://localhost:8004"
 API_PATH: str = "/api/v1"
 API_TOKEN: str = "b2eb1da9861da88743d72a3fb4344288fe2cba44"
+
+
+@pytest.fixture(autouse=True)
+def clear_cache():
+    cache.clear()
+    yield
+    cache.clear()
 
 
 @pytest.fixture(scope="session")
