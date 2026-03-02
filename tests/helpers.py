@@ -1,6 +1,5 @@
 import logging
 from dataclasses import dataclass
-from urllib.parse import urljoin
 
 from referentielijsten_api_client.client import ReferentielijstenClient
 
@@ -13,18 +12,9 @@ class NoServiceConfigured(RuntimeError):
 
 @dataclass(frozen=True, slots=True)
 class ReferentielijstenService:
-    _api_root: str
-    _api_path: str
-    _api_token: str
-
-    @property
-    def _api_url(self):
-        return urljoin(self._api_root, self._api_path)
+    _api_url: str
 
     def client_factory(self) -> ReferentielijstenClient:
-        if not self._api_url or not self._api_token:
+        if not self._api_url:
             raise NoServiceConfigured("API service not configured")
-        return ReferentielijstenClient(
-            base_url=self._api_url,
-            token=self._api_token,
-        )
+        return ReferentielijstenClient(self._api_url)

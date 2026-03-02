@@ -9,7 +9,7 @@ from django.utils.functional import cached_property
 import requests
 from ape_pie import APIClient
 
-from .typing import APITable, APITableItem
+from .typing import APITable
 from .utils import pagination_helper
 
 REFERENTIELIJSTEN_LISTS_LOOKUP_CACHE_TIMEOUT = 5 * 60
@@ -78,7 +78,6 @@ class ReferentielijstenClient(APIClient):
         response = self.get("tabellen")
         response.raise_for_status()
         data = response.json()
-        all_data: list[APITable] = list(pagination_helper(self, data))
         return [
             Table(
                 code=record["code"],
@@ -89,14 +88,13 @@ class ReferentielijstenClient(APIClient):
                     else datetime.fromisoformat(datestr)
                 ),
             )
-            for record in all_data
+            for record in pagination_helper(self, data)
         ]
 
     def get_items_for_table(self, code: str) -> list[TableItem]:
         response = self.get("items", params={"tabel__code": code})
         response.raise_for_status()
         data = response.json()
-        all_data: list[APITableItem] = list(pagination_helper(self, data))
         return [
             TableItem(
                 code=record["code"],
@@ -107,7 +105,7 @@ class ReferentielijstenClient(APIClient):
                     else datetime.fromisoformat(datestr)
                 ),
             )
-            for record in all_data
+            for record in pagination_helper(self, data)
         ]
 
     def get_items_for_table_cached(self, code: str) -> list[TableItem]:

@@ -16,7 +16,7 @@ def test_get_items_for_table(client):
 
 
 @pytest.mark.vcr()
-def test_get_items_for_table_cached(client):
+def test_get_items_for_table_cached(client, vcr_cassette):
     table_code = "tabel1"
     cache_key = f"referentielijsten_lists|get_items_for_table|code:{table_code}"
 
@@ -36,3 +36,9 @@ def test_get_items_for_table_cached(client):
         {"code": "option2", "name": "Option 2", "expires_on": None},
         {"code": "option1", "name": "Option 1", "expires_on": None},
     ]
+
+    # test n requests
+    client.get_items_for_table_cached(table_code)
+    client.get_items_for_table_cached(table_code)
+    client.get_items_for_table_cached(table_code)
+    assert len(vcr_cassette.requests) == 1
