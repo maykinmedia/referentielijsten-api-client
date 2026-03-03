@@ -1,0 +1,118 @@
+from dataclasses import dataclass
+from datetime import datetime, timedelta
+from functools import partial
+
+from django.core.cache import cache
+from django.utils import timezone
+from django.utils.functional import cached_property
+
+import requests
+from ape_pie import APIClient
+
+from .typing import APITable
+from .utils import pagination_helper
+
+REFERENTIELIJSTEN_LISTS_LOOKUP_CACHE_TIMEOUT = 5 * 60
+NEARLY_EXPIRED_DAYS = 7
+
+
+class EndDateMixin:
+    expires_on: datetime | None
+
+    @cached_property
+    def is_expired(self) -> bool:
+        if self.expires_on is None:
+            return False
+        return self.expires_on <= timezone.now()
+
+    @cached_property
+    def is_nearly_expired(self) -> bool:
+        if self.expires_on is None:
+            return False
+        return self.expires_on <= (timezone.now() + timedelta(days=NEARLY_EXPIRED_DAYS))
+
+
+@dataclass
+class TableItem(EndDateMixin):
+    code: str
+    name: str
+    expires_on: datetime | None = None  # from ISO 8601 datetime string
+
+
+@dataclass
+class Table(EndDateMixin):
+    code: str
+    name: str
+    expires_on: datetime | None = None  # from ISO 8601 datetime string
+
+
+class ReferentielijstenClient(APIClient):
+    @property
+    def can_connect(self) -> bool:
+        try:
+            response = self.head("/")
+            response.raise_for_status()
+            return response.status_code == 200
+        except requests.RequestException:
+            return False
+
+    def get_table(self, code: str) -> Table | None:
+        response = self.get("tabellen", params={"code": code})
+        response.raise_for_status()
+        data = response.json()
+        all_data: list[APITable] = list(pagination_helper(self, data))
+        if not all_data:
+            return
+
+        return Table(
+            code=all_data[0]["code"],
+            name=all_data[0]["naam"],
+            expires_on=(
+                None
+                if (datestr := all_data[0].get("einddatumGeldigheid")) is None
+                else datetime.fromisoformat(datestr)
+            ),
+        )
+
+    def get_all_tables(self) -> list[Table]:
+        response = self.get("tabellen")
+        response.raise_for_status()
+        data = response.json()
+        return [
+            Table(
+                code=record["code"],
+                name=record["naam"],
+                expires_on=(
+                    None
+                    if (datestr := record.get("einddatumGeldigheid")) is None
+                    else datetime.fromisoformat(datestr)
+                ),
+            )
+            for record in pagination_helper(self, data)
+        ]
+
+    def get_items_for_table(self, code: str) -> list[TableItem]:
+        response = self.get("items", params={"tabel__code": code})
+        response.raise_for_status()
+        data = response.json()
+        return [
+            TableItem(
+                code=record["code"],
+                name=record["naam"],
+                expires_on=(
+                    None
+                    if (datestr := record.get("einddatumGeldigheid")) is None
+                    else datetime.fromisoformat(datestr)
+                ),
+            )
+            for record in pagination_helper(self, data)
+        ]
+
+    def get_items_for_table_cached(self, code: str) -> list[TableItem]:
+        result = cache.get_or_set(
+            key=f"referentielijsten_lists|get_items_for_table|code:{code}",
+            default=partial(self.get_items_for_table, code),
+            timeout=REFERENTIELIJSTEN_LISTS_LOOKUP_CACHE_TIMEOUT,
+        )
+        assert result is not None
+        return result
