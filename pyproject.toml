@@ -81,6 +81,7 @@ files = [
     {filename = "pyproject.toml"},
     {filename = "README.rst"},
     {filename = "docs/conf.py"},
+    {filename = "referentielijsten_api_client/__init__.py"},
 ]
 
 [tool.coverage.run]
