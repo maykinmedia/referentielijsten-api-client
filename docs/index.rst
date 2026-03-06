@@ -2,27 +2,45 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to referentielijsten_api_client's documentation!
-========================================================
+=============================
+Referentielijsten API Client
+=============================
 
 |build-status| |code-quality| |ruff| |coverage|
 
 |python-versions| |django-versions| |pypi-version|
 
-<One liner describing the project>
+Welcome to the documentation of the **Referentielijsten API Client** library.
 
-Features
+Overview
 ========
 
-* ...
-* ...
+This client is built and tested to work with the ``0.2.0`` version of the **Referentielijsten API**,
+ensuring reliable interaction with all supported endpoints.
+
+It could potentially work with newer minor versions, but compatibility is not guaranteed.
+
+Referentielijsten API
+=====================
+
+For more details about the Referentielijsten API, see the upstream repository on GitHub:
+https://github.com/maykinmedia/referentielijsten
+
+Installation
+============
+
+You can install the library via pip:
+
+.. code-block:: bash
+
+    pip install referentielijsten-api-client
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contents
 
    quickstart
-
+   reference/index
 
 
 Indices and tables

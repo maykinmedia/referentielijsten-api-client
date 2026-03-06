@@ -1,5 +1,5 @@
 ============================
-Referentielijsten Api Client
+Referentielijsten API Client
 ============================
 
 A Python client library for interacting with the `Referentielijsten API <https://github.com/maykinmedia/referentielijsten>`_.
@@ -17,57 +17,111 @@ A Python client library for interacting with the `Referentielijsten API <https:/
 
 .. section-numbering::
 
+Overview
+========
+
+This client is built and tested to work with the ``0.2.0`` version of the **Referentielijsten API**,
+ensuring reliable interaction with all supported endpoints.
+
+It could potentially work with newer minor versions, but compatibility is not guaranteed.
+
+Referentielijsten API
+=====================
+
+For more details about the Referentielijsten API, see the upstream repository on GitHub:
+https://github.com/maykinmedia/referentielijsten
+
 Installation
 ============
+
+You can install the library via pip:
 
 .. code-block:: bash
 
     pip install referentielijsten-api-client
 
-
-
 Usage
 =====
 
-Initialize the client with your API endpoint and token:
+First, import and initialize the client with your API endpoint:
 
 .. code-block:: python
 
     from referentielijsten_api_client.client import ReferentielijstenClient
 
     client = ReferentielijstenClient(
-        base_url={{ base_url }},
-        token={{ your_api_token}},
+        base_url="https://api.example.com/api/v1",  # replace with your API root url
     )
 
-List tables
------------
+Listing all available tables
+----------------------------
+
+You can retrieve a list of all tables available in the Referentielijsten API:
 
 .. code-block:: python
-
-    # List all tables
 
     tables = client.get_all_tables()
 
-List items for a specific table
--------------------------------
+**Example output:**
 
 .. code-block:: python
 
-    # List items
+    [
+        Table(
+            code="tabel1",
+            name="Tabel 1",
+            expires_on=None,
+        ),
+        Table(
+            code="tabel2",
+            name="Tabel 2",
+            expires_on=datetime.datetime(2026, 1, 1, 0, 0, 0),
+        ),
+    ]
 
-    table_code = "tabel_code"
-    items = client.get_items_for_table(table_code)
+Get a Table
+-----------
+
+You can retrieve a specific table from the Referentielijsten API by providing its table code:
+
+.. code-block:: python
+
+    table = client.get_table("table_code")
 
 
-Testing
-=======
+**Example output:**
 
-You can run the test suite using `tox`. To run tests for Python 3.12 and record all HTTP interactions (using `vcrpy`), execute:
+.. code-block:: python
 
-.. code-block:: bash
+    Table(code='tabel1', name='Tabel1', expires_on=None)
 
-    tox -r -e py312 -- --vcr-record=all
+Get Items from a Table
+----------------------
+
+You can retrieve all items from a specific table using the client:
+
+.. code-block:: python
+
+    items = client.get_items_for_table("table_code")
+
+
+**Example output:**
+
+.. code-block:: python
+
+    [
+        TableItem(code="option1", name="Option 1", expires_on=None),
+        TableItem(code="option2", name="Option 2", expires_on=None),
+    ]
+
+Get Items from a Table (Cached)
+-------------------------------
+
+You can retrieve all items from a specific table using the cached version of the client method.
+
+.. code-block:: python
+
+    items = client.get_items_for_table_cached("table_code")
 
 
 .. |build-status| image:: https://github.com/maykinmedia/referentielijsten-api-client/workflows/Run%20CI/badge.svg
