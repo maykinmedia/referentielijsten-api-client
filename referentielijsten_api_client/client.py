@@ -50,7 +50,7 @@ class ReferentielijstenClient(APIClient):
     @property
     def can_connect(self) -> bool:
         try:
-            response = self.head("/")
+            response = self.head("")
             response.raise_for_status()
             return response.status_code == 200
         except requests.RequestException:

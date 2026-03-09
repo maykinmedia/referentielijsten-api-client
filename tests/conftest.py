@@ -4,7 +4,7 @@ import pytest
 
 from .helpers import ReferentielijstenService
 
-API_URL: str = "http://localhost:8004/api/v1"
+API_URL: str = "http://localhost:8004/api/v1/"
 
 
 @pytest.fixture(autouse=True)

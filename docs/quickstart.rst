@@ -21,7 +21,7 @@ First, import and initialize the client with your API endpoint:
     from referentielijsten_api_client.client import ReferentielijstenClient
 
     client = ReferentielijstenClient(
-        base_url="https://api.example.com/api/v1",  # replace with your API root url
+        base_url="https://api.example.com/api/v1/",  # replace with your API root url
     )
 
 Listing all available tables
