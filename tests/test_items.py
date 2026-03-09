@@ -42,3 +42,11 @@ def test_get_items_for_table_cached(client, vcr_cassette):
     client.get_items_for_table_cached(table_code)
     client.get_items_for_table_cached(table_code)
     assert len(vcr_cassette.requests) == 1
+
+
+@pytest.mark.vcr()
+def test_tabel_with_many_items(client):
+    # test pagination
+    table_code = "tabel-with-many-items"
+    items = client.get_items_for_table(table_code)
+    assert len(items) == 101
