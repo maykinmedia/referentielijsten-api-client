@@ -43,6 +43,7 @@ tests = [
     "pytest",
     "pytest-django",
     "pytest-cov",
+    "freezegun",
     "tox",
     "ruff",
     "pyright",
